@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
-# displays TCP & UDP Ports
+#!/bin/bash
 
-netstat -lp
+# Display only listening sockets with program name and PID
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+
+# Using ss to list TCP and UDP listening ports along with PID and program name
+ss -tulnp | awk 'NR>1 {print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t" $7}'
